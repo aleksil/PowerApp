@@ -200,13 +200,15 @@ namespace PowerApp
             {
                 var groupBorder = new Border
                 {
-                    Style = (Style)FindResource("CategoryBorderStyle")
+                    Style = (Style)FindResource("CategoryBorderStyle"),
+                    Padding = cat.HasActiveRequests ? new Thickness(14, 12, 14, 12) : new Thickness(14, 10, 14, 10),
+                    Margin = cat.HasActiveRequests ? new Thickness(0, 0, 0, 12) : new Thickness(0, 0, 0, 8)
                 };
 
                 var groupStack = new StackPanel();
 
                 // Category Header
-                var headerGrid = new Grid { Margin = new Thickness(0, 0, 0, 8) };
+                var headerGrid = new Grid { Margin = new Thickness(0, 0, 0, cat.HasActiveRequests ? 8 : 0) };
                 headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
                 headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
@@ -256,27 +258,8 @@ namespace PowerApp
                 headerGrid.Children.Add(badgeBorder);
                 groupStack.Children.Add(headerGrid);
 
-                // Category Content
-                if (cat.Requests.Count == 0)
-                {
-                    var nonePanel = new Border
-                    {
-                        Background = new SolidColorBrush(Color.FromArgb(20, 255, 255, 255)),
-                        CornerRadius = new CornerRadius(4),
-                        Padding = new Thickness(10, 8, 10, 8),
-                        Margin = new Thickness(0, 4, 0, 0)
-                    };
-                    var noneText = new TextBlock
-                    {
-                        Text = "None.",
-                        FontStyle = FontStyles.Italic,
-                        FontSize = 12,
-                        Foreground = new SolidColorBrush(Color.FromRgb(120, 120, 135))
-                    };
-                    nonePanel.Child = noneText;
-                    groupStack.Children.Add(nonePanel);
-                }
-                else
+                // Category Content (Only rendered if there are active requests)
+                if (cat.HasActiveRequests)
                 {
                     foreach (var req in cat.Requests)
                     {

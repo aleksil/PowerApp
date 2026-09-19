@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:PowerApp"
         mc:Ignorable="d"
         Title="Power Requests Monitor"
-        Height="620" Width="680"
-        MinHeight="450" MinWidth="520"
+        Height="1024" Width="860"
+        MinHeight="500" MinWidth="650"
         WindowStartupLocation="CenterScreen"
         Background="#1E1E24"
         Foreground="#ECECF1"
@@ -163,9 +163,8 @@
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <CheckBox x:Name="AutoRefreshCheckBox" Content="Auto-refresh" IsChecked="True"
                               Foreground="#CCCCCC" VerticalAlignment="Center" Checked="OnAutoRefreshChanged" Unchecked="OnAutoRefreshChanged"/>
-                    <ComboBox x:Name="RefreshIntervalComboBox" Margin="8,0,0,0" Width="70"
-                              SelectionChanged="OnIntervalSelectionChanged" Background="#3E3E50" Foreground="#FFFFFF"
-                              BorderThickness="0">
+                    <ComboBox x:Name="RefreshIntervalComboBox" Margin="8,0,0,0" Width="72"
+                              SelectionChanged="OnIntervalSelectionChanged">
                         <ComboBoxItem Content="3s"/>
                         <ComboBoxItem Content="5s" IsSelected="True"/>
                         <ComboBoxItem Content="10s"/>

@@ -17,6 +17,20 @@ namespace PowerApp.Tests
         }
 
         [Fact]
+        public void MainWindow_CanBeConstructed()
+        {
+            var thread = new System.Threading.Thread(() =>
+            {
+                var service = new Services.PowerMonitorService();
+                var win = new MainWindow(service);
+                Assert.NotNull(win);
+            });
+            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.Start();
+            thread.Join();
+        }
+
+        [Fact]
         public void DevicePathResolver_HandlesNullAndEmpty()
         {
             Assert.Equal(string.Empty, DevicePathResolver.ResolveToDosPath(null));
